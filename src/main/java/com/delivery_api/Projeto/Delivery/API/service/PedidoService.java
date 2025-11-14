@@ -103,5 +103,22 @@ public class PedidoService {
     public List<Pedido> listarPorPeriodo(LocalDateTime inicio, LocalDateTime fim) {
         return pedidoRepository.findByDataPedidoBetween(inicio, fim);
     }
+
+    /**
+     * Buscar pedido por ID
+     */
+    @Transactional(readOnly = true)
+    public Pedido buscarPorId(Long id) {
+        return pedidoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado: " + id));
+    }
+
+    /**
+     * Listar todos os pedidos
+     */
+    @Transactional(readOnly = true)
+    public List<Pedido> listarTodos() {
+        return pedidoRepository.findAll();
+    }
 }
 
